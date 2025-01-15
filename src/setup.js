@@ -2,7 +2,7 @@ import AppwriteService from './appwrite.js';
 import { throwIfMissing } from './utils.js';
 
 async function setup() {
-  const databaseId = process.env.APPWRITE_DATABASE_ID ?? 'orders';
+  const databaseId = process.env.APPWRITE_DATABASE_ID ?? 'add to cart';
   const collectionId = process.env.APPWRITE_COLLECTION_ID ?? 'orders';
 
   console.log('Executing setup script...');
