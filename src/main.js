@@ -13,6 +13,17 @@ export default async (context) => {
   const databaseId = process.env.APPWRITE_DATABASE_ID ?? 'orders';
   const collectionId = process.env.APPWRITE_COLLECTION_ID ?? 'orders';
 
+  const corsHeaders = {
+    'Access-Control-Allow-Origin': '*', // Replace '*' with your domain for better security.
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
+
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.text('', 204, corsHeaders);
+  }
+  
   if (req.method === 'GET') {
     const html = interpolate(getStaticFile('index.html'), {
       APPWRITE_FUNCTION_API_ENDPOINT: process.env.APPWRITE_FUNCTION_API_ENDPOINT,
