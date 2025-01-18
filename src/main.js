@@ -66,6 +66,8 @@ export default async (context) => {
       context.log('Session:');
       context.log(session);
 
+      context.log('User ID:', userId);
+
       log(`Created Stripe checkout session for user ${userId}.`);
       return res.redirect(session.url, 303);
 
