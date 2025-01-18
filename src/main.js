@@ -14,16 +14,16 @@ export default async (context) => {
   const collectionId = process.env.APPWRITE_COLLECTION_ID ?? 'orders';
 
   const corsHeaders = {
-    'Access-Control-Allow-Origin': '*', // Replace '*' with your domain for better security.
+    'Access-Control-Allow-Origin': req.headers['origin'] || window.location.origin,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-appwrite-user-id', // Added x-appwrite-user-id here
   };
+
 
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.text('', 204, corsHeaders);
   }
-  
   if (req.method === 'GET') {
     const html = interpolate(getStaticFile('index.html'), {
       APPWRITE_FUNCTION_API_ENDPOINT: process.env.APPWRITE_FUNCTION_API_ENDPOINT,
